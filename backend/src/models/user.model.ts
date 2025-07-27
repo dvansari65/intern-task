@@ -20,12 +20,31 @@ const UserSchema = new mongoose.Schema(
       lowercase: true,
       required: [true, "Email is required"],
       trim: true,
+      match: [/^\S+@\S+\.\S+$/, "Invalid email format"],
+    },
+    phone: {
+      type: String,
+      match: [/^[0-9]{10}$/, "Phone number must be 10 digits"],
     },
     password: {
       type: String,
       trim: true,
       required: [true, "password is required!"],
       minlength: [8, "Password must be at least 8 characters long"],
+    },
+    msTeamsEmail: {
+      type: String,
+      match: [/^\S+@[\S\.]+$/, "Invalid MS Teams email"],
+    },
+    resumeUrl: {
+      type: String,
+    },
+    github: {
+      type: String,
+      match: [
+        /^https?:\/\/(www\.)?github\.com\/[A-Za-z0-9_-]+$/,
+        "Invalid GitHub profile URL",
+      ],
     },
     skills: [
       {
